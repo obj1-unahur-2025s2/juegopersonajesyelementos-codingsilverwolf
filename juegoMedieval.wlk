@@ -9,7 +9,7 @@ object ballesta {
     method cantidadDeFlechas(){
         return cantidadDeFlechas
     }
-    // settet para cantidadDeFlechas
+    // settler para cantidadDeFlechas
     method disminuirCantidadDeFlechas(unaCantidad){
         cantidadDeFlechas -= unaCantidad
     }
@@ -17,15 +17,11 @@ object ballesta {
     method estaCargada(){
         return cantidadDeFlechas > 0
     }
-
     //DELEGAR RESPONSABILIDAD: la ballesta sabe cómo la usan 
 
     method usar(){
-        disminuirCantidadDeFlechas(1)
-    }
-    
-
-    
+        self.disminuirCantidadDeFlechas(1)
+    }    
 }
 
 object jabalina {
@@ -42,12 +38,11 @@ object jabalina {
         carga += unValor
     }
     method estaCargada(){
-        return carga > 0
+        return (carga > 0)
     }
     //DELEGAR RESPONSABILIDAD: la ballesta sabe cómo la usan
-
     method usar(){
-        incrementarCarga(-1)
+        self.incrementarCarga(-1)
     }
 }
 
@@ -59,8 +54,7 @@ object castillo {
     }
     var defensa = 150
     
-    // getters y setters para las variables
-    
+    // getters y setters para las variables    
     method defensa(){
         return defensa
     }
@@ -71,15 +65,15 @@ object castillo {
     }
     // DELEGAR RESPONSABILIDAD: el castillo sabe cómo lo atacan, cómo otorgar valor y como recibir un trabajo
     method recibirAtaque(potenciaDelAtaque){
-        cambiarDefensa(-potenciaDelAtaque)
+        self.cambiarDefensa(-potenciaDelAtaque)
 
     }
     method otorgarValor(){
-        return 0.2*defensa()
+        return 0.2*defensa
 
     }
     method recibirTrabajo(){
-        defensa = min([defensa()+20, 200])
+        defensa = (defensa+20).min(200)
     }
 }
 
@@ -93,14 +87,14 @@ object aurora {
         return estaViva
     }
     // setter para estado
-    method cambiarestaViva(trueOrFalse){
+    method cambiarEstaViva(trueOrFalse){
         estaViva = trueOrFalse
     }
 
     // DELEGAR RESPONSABILIDAD: aurora sabe cómo la atacan, cómo otorgar valor y como recibir un trabajo
     method recibirAtaque(potenciaDelAtaque){
-        if potenciaDelAtaque >= 10{
-            cambiarEstaViva(false)
+        if (potenciaDelAtaque >= 10) {
+            self.cambiarEstaViva(false)
         }
 
     }
@@ -125,9 +119,9 @@ object tipa {
         }
     
     method otorgarValor(){
-        return 2*altura()
+        return 2*altura
     }
     method recibirTrabajo(){
-        incrementarAltura(1)
+        self.incrementarAltura(1)
     }
 }
