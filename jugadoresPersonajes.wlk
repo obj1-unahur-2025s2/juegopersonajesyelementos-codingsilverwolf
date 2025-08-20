@@ -1,3 +1,5 @@
+import juegoMedieval.*
+
 // jugadora
 
 object luisa{
@@ -28,7 +30,7 @@ object floki{
     }
 
     method encontrar(elemento){
-        if armaActual.estaCargada() == true{
+        if (armaActual.estaCargada()) {
             elemento.recibirAtaque(armaActual.potencia())
             armaActual.usar()
         }
@@ -56,9 +58,9 @@ object mario {
     }
             
     method encontrar(elemento){
-        valorRecolectado += elemento.otorgarValor()
+        self.incrementarValorRecolectado(elemento.otorgarValor())
         elemento.recibirTrabajo()
-        establecerUltimoElementoEncontrado(elemento)
+        self.establecerUltimoElementoEncontrado(elemento)
     }
 
     method esFeliz(){
