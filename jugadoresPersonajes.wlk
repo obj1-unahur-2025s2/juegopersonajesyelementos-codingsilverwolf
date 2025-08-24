@@ -1,77 +1,66 @@
-import juegoMedieval.*
+import armas.*
+import elementos.*
 
-// jugadora
-
-object luisa{
+object luisa {
     var personajeActivo = floki
-    // getter y setter
-    method personajeActivo(){
-        return personajeActivo
+    //getter
+    method personajeActivo() {
+        return personajeActivo      
     }
-    method establecerPersonajeActivo(personaje){
-        personajeActivo =  personaje
+    method cambiarPersonaje(unPersonaje){
+        personajeActivo = unPersonaje
     }
     method aparece(elemento){
         personajeActivo.encontrar(elemento)
     }
+  
 }
 
-// personajes
-
-object floki{
-    var armaActual = ballesta
-    // getter para arma
-    method armaActual(){
-        return armaActual
+object floki {
+    var arma = ballesta
+    //getter
+    method arma(){
+        return arma
     }
-    // setter para arma
-    method cambiarArmaActual(unArma){
-        armaActual = unArma
+    method equipar(unArma){
+        arma = unArma
     }
-
+    
     method encontrar(elemento){
-        if (armaActual.estaCargada()) {
-            elemento.recibirAtaque(armaActual.potencia())
-            armaActual.usar()
+        if (arma.estaCargada()){
+            elemento.recibirAtaque(arma.potencia())
+            arma.usar()
         }
-
+    
     }
 }
 
 object mario {
     var valorRecolectado = 0
-    var ultimoElementoEncontrado = castillo
-    // getter para variables
+    var ultimoElementoEncontrado = ningunElemento
     method valorRecolectado(){
         return valorRecolectado
     }
-    method ultimoElementoEncontrado(){
-        return ultimoElementoEncontrado
-    }
-    
-    // setters    
-    method incrementarValorRecolectado(cantidad){
-        valorRecolectado += cantidad
-    }
-    method establecerUltimoElementoEncontrado(elemento){
-        ultimoElementoEncontrado = elemento
-    }
-            
     method encontrar(elemento){
-        self.incrementarValorRecolectado(elemento.otorgarValor())
+        valorRecolectado = elemento.otorgarValor()
         elemento.recibirTrabajo()
-        self.establecerUltimoElementoEncontrado(elemento)
+        ultimoElementoEncontrado = elemento
+
+    }
+    method esFeliz(){
+        return (ultimoElementoEncontrado.altura() >= 10 || valorRecolectado >= 50)
     }
 
-    method esFeliz(){
-        return ultimoElementoEncontrado.altura() >= 10 or valorRecolectado >= 50
-    }
-        
+  
 }
 
-
-        
-
-
-
-    
+// Creamos un elemento neutro que se lleva bien con la felicidad de mario en el caso de que no se encuentre con nada
+object ningunElemento {
+    method altura (){
+        return 0
+    }
+    method recibirAtaque(){}
+    method otorgarValor(){}
+    method recibirTrabajo(){}
+  
+}
